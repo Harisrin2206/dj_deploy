@@ -1,0 +1,28 @@
+<!-- jobs/templates/jobs/job_list.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Job Listings{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Available Jobs</h1>
+
+<!-- Job Search Form -->
+<form method="GET" action="{% url 'job_list' %}" class="d-flex mb-4">
+    <input class="form-control me-2" type="search" name="search" placeholder="Search jobs by title" value="{{ request.GET.search }}">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+<!-- Job Listings -->
+<div class="list-group">
+    {% for job in jobs %}
+        <a href="#" class="list-group-item list-group-item-action">
+            <h5 class="mb-1">{{ job.title }}</h5>
+            <p class="mb-1">{{ job.description|truncatewords:20 }}</p>
+            <small>{{ job.company }}</small>
+        </a>
+    {% empty %}
+        <p>No jobs found.</p>
+    {% endfor %}
+</div>
+{% endblock %}

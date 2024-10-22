@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">HR Dashboard</h1>
+
+        <h2 class="mt-4">Job Postings</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Company</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                <tr>
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.description }}</td>
+                    <td>{{ job.company }}</td>
+                    <td>{{ job.created_at }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No jobs posted yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="mt-4">Submitted Resumes</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Job</th>
+                    <th>Resume</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resume in resumes %}
+                <tr>
+                    <td>{{ resume.user.username }}</td>
+                    <td>{{ resume.job.title }}</td>
+                    <td><a href="{{ resume.file.url }}" target="_blank">Download</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No resumes submitted yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
